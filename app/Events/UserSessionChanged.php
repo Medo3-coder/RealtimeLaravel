@@ -14,14 +14,18 @@ class UserSessionChanged implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $message ;
+    public $type ;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message , $type)
     {
-        //
+        $this->message = $message;
+        $this->type = $type;
     }
 
     /**
@@ -34,4 +38,9 @@ class UserSessionChanged implements ShouldBroadcast
         // public channel
         return new Channel('notifications');
     }
+
+
+    /*
+    once event dispatched will see in front end $message and $type
+    */
 }
