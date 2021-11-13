@@ -6,7 +6,8 @@ require('./bootstrap');
 
 //   here commen error dont use  Echo.channel('notifications')   => Echo is not function error
 //  Instead Echo.channel try window.Echo.channel
-window.Echo.channel('notifications')
+
+window.Echo.private('notifications')
     .listen('UserSessionChanged', (e) => {
         const notificationElement = document.getElementById('notification');
         notificationElement.innerText = e.message; // add message from callback
