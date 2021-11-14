@@ -10,6 +10,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UserUpdated implements ShouldBroadcast
 {
@@ -34,6 +35,7 @@ class UserUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        Log::debug("Updated {$this->user->name}");
         return new Channel('users');
     }
 }
