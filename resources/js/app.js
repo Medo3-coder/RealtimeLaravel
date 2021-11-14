@@ -18,5 +18,4 @@ window.Echo.private('notifications')
         notificationElement.classList.add('alert-' + e.type); // add type from callback
 
 
-
     })
