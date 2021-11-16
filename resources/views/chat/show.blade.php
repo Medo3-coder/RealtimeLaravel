@@ -49,8 +49,7 @@
                             <p><strong>Online Now</strong></p>
 
                             <ul id="users" class="list-unstyled overflow-auto text-info" style="height: 45vh">
-                                <li>Test1</li>
-                                <li>Test2</li>
+
                             </ul>
 
                         </div>
@@ -69,6 +68,38 @@
 
 @push('scripts')
     <script>
+        const usersElement = document.getElementById('users');
+        //using presence channel
+        Echo.join('chat')
+            .here((users) => {
+                users.forEach((user , index) => {
+                let element = document.createElement('li');
+                element.setAttribute('id' , user.id);
+                element.innerText = user.name;
+
+            usersElement.appendChild(element); //add element users to the list of users
+            });
+
+        })
+        .joining((user) => {
+                let element = document.createElement('li');
+                element.setAttribute('id' , user.id);
+                element.innerText = user.name;
+                usersElement.appendChild(element); // add users to the <li>
+        })
+        .leaving((user) => {
+                const element = document.getElementById(user.id);
+                element.parentNode.removeChild(element);
+        });
+
+
+
+        /*presence channel:
+
+        When using certain applications, it is usually expected that the current user is able to see all other users currently using the service alongside them.
+         For instance, Dropbox Paper shows all the users that are currently viewing a document.
+        This is very useful and it helps stop users feeling like they are alone on your application.
+        */
 
     </script>
 

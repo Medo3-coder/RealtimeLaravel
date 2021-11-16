@@ -23,3 +23,13 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('notifications', function ($user) {
     return $user !=null ;          // only auth user
 });
+
+
+
+
+Broadcast::channel('chat', function ($user) {
+    if( $user !=null )
+    {
+       return ['id' => $user->id , 'name' => $user->name];
+    }
+});
