@@ -29,3 +29,5 @@ Route::view('/game', 'game.show')->name('game.show');
 
 // chat routs
 Route::get('/chat' , [ChatController::class , 'showChat'])->name('chat.show');
+
+Route::post('/chat/message' , [ChatController::class , 'messageRecived'])->name('chat.message');

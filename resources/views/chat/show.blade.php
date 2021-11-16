@@ -103,5 +103,20 @@
 
     </script>
 
+
+    <script>
+        const messageElement = document.getElementById('message');
+        const sendElement = document.getElementById('send');
+
+        sendElement.addEventListener('click' , (e) => {
+            e.preventDefault();
+            window.axios.post('/chat/message' , {
+                message : messageElement.value,
+            });
+            messageElement.value = ''  ;  // to allow user to send message again
+        })
+
+    </script>
+
 @endpush
 
