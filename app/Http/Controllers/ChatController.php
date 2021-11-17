@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GreetingSent;
 use App\Events\MessageSent;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,8 +38,9 @@ class ChatController extends Controller
     public function greetRecived(Request $request,User $user)
     {
         // $myuser =  User::findOrFail($user);
-
-                     // receiver          //sender
+              broadcast( new GreetingSent($user , "{$request->user()->name} greeted you"));  // receiver
+              broadcast( new GreetingSent($request->user() , "you greeted {$user->name}"));   // sender
+                        // receiver       //sender
       return "Greeting {$user->name} from {$request->user()->name}";
     }
 }
